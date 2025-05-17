@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corredores de Uruguay</title>
+</head>
+<body>
+    <h1>Sitio de Corredores</h1>
+    <img alt="Imagen de corredores">
+    <button>Datos</button>
+    <button>Estadísticas</button>
+    
+    <div class="big-container">
+        <h3>Datos</h3>
+        <div class="container">
+            <h4>Carreras</h4>
+            <form id="ingresoCarrera">
+                <label for="nombreCarrera">Nombre:</label>
+                <input type="text" id="nombreCarrera">
+
+                <label>Departamento:</label>
+                <select>
+                    <option value="1" selected>Montevideo</option>
+                    <option value="2">Canelones</option>
+                    <option value="3">Maldonado</option>
+                    <option value="4">Rocha</option>
+                    <option value="5">Treinta y Tres</option>
+                    <option value="6">Cerro Largo</option>
+                    <option value="7">Rivera</option>
+                    <option value="8">Artigas</option>
+                    <option value="9">Salto</option>
+                    <option value="10">Paysandú</option>
+                    <option value="11">Río Negro</option>
+                    <option value="12">Soriano</option>
+                    <option value="13">Colonia</option>
+                    <option value="14">San José</option>
+                    <option value="15">Flores</option>
+                    <option value="16">Florida</option>
+                    <option value="17">Lavalleja</option>
+                    <option value="18">Durazno</option>
+                    <option value="19">Tacuarembó</option>
+                </select>
+
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha">
+
+                <label for="cupo">Cupo:</label>
+                <input type="text" placeholder="30" id="cupo">
+                <button>Agregar Carrera</button>
+            </form>            
+        </div>
+        
+        <div class="container">
+            <h4>Patrocinadores</h4>
+            <form id="ingresoSponsor">
+                <label for="nombreSponsor">Nombre:</label>
+                <input type="text" id="nombreSponsor">
+
+                <label>Rubro:</label>
+                <select>
+                    <option value="food" selected>Alimenticio</option>
+                    <option value="bank">Banco</option>
+                    <option value="drink">Bebidas</option>
+                    <option value="pharm">Farmacia</option>
+                    <option value="clothes">Ropa deportiva</option>
+                    <option value="statal">Estatal</option>  
+                    <option value="gral">General</option>
+                </select>
+
+                <label>Carreras:</label>
+                <select id="carrerasSponsor" multiple></select>
+
+                <button>Agregar/Actualizar Patrocinador</button>
+            </form>            
+        </div>
+
+        <div class="container">
+            <h4>Corredores</h4>
+            <form id="ingresoCorredor">
+                <label for="nombreCorredor">Nombre:</label>
+                <input type="text" id="nombreCorredor">
+
+                <label for="edad">Edad:</label>
+                <input type="text" id="edad">
+
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula">
+
+                <label for="fechaMedica">Fecha de vencimiento de ficha médica:</label>
+                <input type="date" id="fechaMedica">
+
+                <p>Tipo de corredor:</p>
+                <label for="elite">Deportista de élite</label>
+                <input type="radio" id="elite" name="tipoCorredor">
+                <label for="comun">Deportista común</label>
+                <input type="radio" id="comun" name="tipoCorredor">
+                
+                <button>Agregar Corredor</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <h4>Inscripciones</h4>
+            <form id="ingresoInscripciones">
+                <label>Corredores:</label>
+                <select id="corredoresRegistrados"></select>
+
+                <label>Carreras:</label>
+                <select id="carrerasRegistradas"></select>
+
+                <button>Inscribir</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Programación 1 - Obligatorio 1er semestre 2025 - Autores:</p>
+        <p>Francisco Lorenzo Bonanni (Número 299134)</p>
+        <p>Aitana</p>
+    </footer>
+</body>
+</html>
