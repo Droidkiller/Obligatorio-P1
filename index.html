@@ -48,7 +48,7 @@
 
                 <label for="cupo">Cupo:</label>
                 <input type="text" placeholder="30" id="cupo">
-                <button>Agregar Carrera</button>
+                <button type="button">Agregar Carrera</button>
             </form>            
         </div>
         
@@ -116,14 +116,53 @@
     </div>
 
     <div class="big-container">
-
+        <h3>Estadísticas</h3>
         <div class="container">
-
+            <h4>Datos generales</h4>
+            <p> Promedio de inscriptos por carrera: sin datos</p>
+            <p>Carrera/s con más inscriptos:</p>
+            <ul id="IdMasInscriptos">
+                <li> sin datos</li>
+            </ul>
+            <p>Carrera/s sin inscriptos ordenadas por fecha:</p>
+            <ul id="IdOrdenados">
+                <li> sin datos</li>
+            </ul>
+            <p>Porcentaje de corredores de elite: sin datos</p>
         </div>
         <div class="container">
+             <h4>Consulta inscriptos</h4>
+                <label for="idCarreraConsulta">Carrera:</label>
+                <select id="idCarreraConsulta"></select>
+
+                <label>Ordenar por:</label>
+                <input type="radio" name="orden" id="idOrdenNombre" checked>
+                <label for="idOrdenNombre">Nombre</label>
+
+                <input type="radio" name="orden" id="idOrdenNumero">
+                <label for="idOrdenNumero">Número</label>
+
+                <p>Inscriptos</p>
+                <table class="datos" id="tablaDatos">
+                        <thead>
+                            <tr class="filaSuperior">
+                                <th >Titulo</th>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>Cédula </th>
+                                <th>Ficha Médica</th>
+                                <th>Número</th>
+                            </tr>
+                        </thead>
+                </table>
+         </div>
+         <div class="container">
+            <h4>Visualizar Mapa:</h4>
+            <input type="radio" name="mapa" id="idMapaCarreras" checked>
+            <label for="idMapaCarreras">Por Carreras</label>
             
-        </div>
-        <div class="container">
+            <input type="radio" name="mapa" id="idMapaInscriptos">
+            <label for="idMapaInscriptos">Por Inscripciones</label>
             
         </div>
     </div>
@@ -131,7 +170,7 @@
     <footer>
         <p>Programación 1 - Obligatorio 1er semestre 2025 - Autores:</p>
         <p>Francisco Lorenzo Bonanni (Número 299134) <a href="https://www.linkedin.com/in/francisco-lorenzo-bonanni-4602041a2/" target="_blank"><img src="img/linkedin-icon.png"></a></p>
-        <p>Aitana Alvarez (Número 340201)</p>
+        <p>Aitana Alvarez (Número 340201)</p><a href="https://www.linkedin.com/in/aitana-alvarez-90658a2a5/" target="_blank"><img src="img/linkedin-icon.png"></a></p>
     </footer>
 </body>
 </html>
