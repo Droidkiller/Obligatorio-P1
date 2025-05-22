@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css" />
     <title>Corredores de Uruguay</title>
 </head>
 <body>
-    <h1>Sitio de Corredores</h1>
-    <img src="img/corredores.jpg" alt="Imagen de gente corriendo">
+    <div class="cabecera">
+        <h1>Sitio de Corredores</h1>
+        <img src="img/corredores.jpg" alt="Imagen de gente corriendo">
+    </div>
     <br>
-    <button>Datos</button>
-    <button>Estadísticas</button>
+
+    <div class="botones-cabecera">
+        <button>Datos</button>
+        <button>Estadísticas</button>
+    </div>
     
     <div class="big-container">
         <h3>Datos</h3>
         <div class="container">
             <h4>Carreras</h4>
-            <form id="ingresoCarrera">
+            <form class="formulario" id="ingresoCarrera">
                 <label for="nombreCarrera">Nombre:</label>
                 <input type="text" id="nombreCarrera">
 
@@ -54,7 +60,7 @@
         
         <div class="container">
             <h4>Patrocinadores</h4>
-            <form id="ingresoSponsor">
+            <form class="formulario" id="ingresoSponsor">
                 <label for="nombreSponsor">Nombre:</label>
                 <input type="text" id="nombreSponsor">
 
@@ -78,7 +84,7 @@
 
         <div class="container">
             <h4>Corredores</h4>
-            <form id="ingresoCorredor">
+            <form class="formulario" id="ingresoCorredor">
                 <label for="nombreCorredor">Nombre:</label>
                 <input type="text" id="nombreCorredor">
 
@@ -91,11 +97,17 @@
                 <label for="fechaMedica">Fecha de vencimiento de ficha médica:</label>
                 <input type="date" id="fechaMedica">
 
-                <p>Tipo de corredor:</p>
-                <label for="elite">Deportista de élite</label>
-                <input type="radio" id="elite" name="tipoCorredor">
-                <label for="comun">Deportista común</label>
-                <input type="radio" id="comun" name="tipoCorredor">
+                <div class="radio-row">
+                    <p class="radio-label">Tipo de corredor:</p>
+                    <div class="radio-group">
+                        <input type="radio" id="elite" name="tipoCorredor">
+                        <label for="elite">Deportista de élite</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="comun" name="tipoCorredor" checked>
+                        <label for="comun">Deportista común</label>
+                    </div>
+                </div>
                 
                 <button>Agregar Corredor</button>
             </form>
@@ -103,7 +115,7 @@
 
         <div class="container">
             <h4>Inscripciones</h4>
-            <form id="ingresoInscripciones">
+            <form class="formulario" id="ingresoInscripciones">
                 <label>Corredores:</label>
                 <select id="corredoresRegistrados"></select>
 
@@ -135,35 +147,47 @@
                 <label for="idCarreraConsulta">Carrera:</label>
                 <select id="idCarreraConsulta"></select>
 
-                <label>Ordenar por:</label>
-                <input type="radio" name="orden" id="idOrdenNombre" checked>
-                <label for="idOrdenNombre">Nombre</label>
+                <div class="radio-row">                    
+                    <p class="radio-label">Ordenar por:</p>
+                    <div class="radio-group">
+                        <input type="radio" name="orden" id="idOrdenNombre" checked>
+                        <label for="idOrdenNombre">Nombre</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" name="orden" id="idOrdenNumero">
+                        <label for="idOrdenNumero">Número</label>
+                    </div>
+                </div>
 
-                <input type="radio" name="orden" id="idOrdenNumero">
-                <label for="idOrdenNumero">Número</label>
-
-                <p>Inscriptos</p>
+                
                 <table class="datos" id="tablaDatos">
-                        <thead>
-                            <tr class="filaSuperior">
-                                <th >Titulo</th>
-                                <th>Nombre</th>
-                                <th>Edad</th>
-                                <th>Cédula </th>
-                                <th>Ficha Médica</th>
-                                <th>Número</th>
-                            </tr>
-                        </thead>
+                    <caption>Inscriptos</caption>
+                    <thead>
+                        <tr class="filaSuperior">
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Cédula </th>
+                            <th>Ficha Médica</th>
+                            <th>Número</th>
+                        </tr>
+                    </thead>
                 </table>
          </div>
          <div class="container">
             <h4>Visualizar Mapa:</h4>
-            <input type="radio" name="mapa" id="idMapaCarreras" checked>
-            <label for="idMapaCarreras">Por Carreras</label>
-            
-            <input type="radio" name="mapa" id="idMapaInscriptos">
-            <label for="idMapaInscriptos">Por Inscripciones</label>
-            
+            <div class="radio-row">
+                <div class="radio-group">
+                    <input type="radio" name="mapa" id="idMapaCarreras" checked>
+                    <label for="idMapaCarreras">Por Carreras</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" name="mapa" id="idMapaInscriptos">
+                    <label for="idMapaInscriptos">Por Inscripciones</label>
+                </div>
+            </div>
+            <div id="containerMapa">
+
+            </div>
         </div>
     </div>
     
