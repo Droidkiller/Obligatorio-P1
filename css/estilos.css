@@ -1,3 +1,9 @@
+/*
+Autores: 
+Francisco Lorenzo Bonanni (299134)
+Aitana Alvarez (340201)
+*/
+
 .big-container {
     background-color: #D5F4D4;
     padding: 10px;
@@ -78,4 +84,8 @@ footer {
     margin: 5px;
     border-radius: 5px;
     padding: 10px;
+}
+
+#bttnAgregarCarrera {
+    width: 160px;
 }
