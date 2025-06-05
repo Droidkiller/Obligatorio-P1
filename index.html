@@ -9,6 +9,8 @@ Aitana Alvarez (340201)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <script src="js/clases.js"></script>
+    <script src="js/main.js"></script>
     <title>Corredores de Uruguay</title>
 </head>
 <body>
@@ -19,20 +21,20 @@ Aitana Alvarez (340201)
     <br>
 
     <div class="botones-cabecera">
-        <button>Datos</button>
-        <button>Estadísticas</button>
+        <button id="bttnDatos">Datos</button>
+        <button id="bttnEstadisticas">Estadísticas</button>
     </div>
     
-    <div class="big-container">
+    <div id ="divDatos" class="big-container">
         <h3>Datos</h3>
         <div class="container">
             <h4>Carreras</h4>
-            <form class="formulario" id="ingresoCarrera">
+            <form class="formulario" id="formCarrera" onsubmit="agregarCarrera(event)">
                 <label for="nombreCarrera">Nombre:</label>
-                <input type="text" id="nombreCarrera">
+                <input type="text" id="nombreCarrera" required>
 
-                <label>Departamento:</label>
-                <select>
+                <label for="deptoCarrera">Departamento:</label>
+                <select required id="deptoCarrera">
                     <option value="1" selected>Montevideo</option>
                     <option value="2">Canelones</option>
                     <option value="3">Maldonado</option>
@@ -54,12 +56,12 @@ Aitana Alvarez (340201)
                     <option value="19">Tacuarembó</option>
                 </select>
 
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha">
+                <label for="fechaCarrera">Fecha:</label>
+                <input type="date" id="fechaCarrera" required>
 
-                <label for="cupo">Cupo:</label>
-                <input type="text" placeholder="30" id="cupo">
-                <button type="button" id="bttnAgregarCarrera">Agregar Carrera</button>
+                <label for="cupoCarrera">Cupo:</label>
+                <input type="number" placeholder="30" required id="cupoCarrera" min="1" max="1000">
+                <button type="submit" id="bttnAgregarCarrera">Agregar Carrera</button>
             </form>            
         </div>
         
@@ -71,13 +73,13 @@ Aitana Alvarez (340201)
 
                 <label>Rubro:</label>
                 <select>
-                    <option value="food" selected>Alimenticio</option>
-                    <option value="bank">Banco</option>
-                    <option value="drink">Bebidas</option>
-                    <option value="pharm">Farmacia</option>
-                    <option value="clothes">Ropa deportiva</option>
-                    <option value="statal">Estatal</option>  
-                    <option value="gral">General</option>
+                    <option value="Alimenticio" selected>Alimenticio</option>
+                    <option value="Banco">Banco</option>
+                    <option value="Bebidas">Bebidas</option>
+                    <option value="Farmacia">Farmacia</option>
+                    <option value="Ropa deportiva">Ropa deportiva</option>
+                    <option value="Estatal">Estatal</option>  
+                    <option value="General">General</option>
                 </select>
 
                 <label>Carreras:</label>
@@ -132,7 +134,7 @@ Aitana Alvarez (340201)
         </div>
     </div>
 
-    <div class="big-container">
+    <div id ="divEstadisticas" class="big-container">
         <h3>Estadísticas</h3>
         <div class="container">
             <h4>Datos generales</h4>

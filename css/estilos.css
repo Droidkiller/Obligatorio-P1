@@ -89,3 +89,15 @@ footer {
 #bttnAgregarCarrera {
     width: 160px;
 }
+
+#bttnDatos {
+    background-color: red;
+}
+
+#divDatos {
+    display: block;
+}
+
+#divEstadisticas {
+    display: none;
+}
