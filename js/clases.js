@@ -1,3 +1,9 @@
+/*
+Autores: 
+Francisco Lorenzo Bonanni (299134)
+Aitana Alvarez (340201)
+*/
+
 class Sistema {
     constructor() {
         this.carreras = [];
@@ -43,6 +49,10 @@ class Corredor {
 
     toString() {
         return "Nombre: " + this.nombre + " " + this.edad + " años, CI: " + this.cedula + " Ficha Médica " + this.fechaFicha + " " + this.tipo;   
+    }
+
+    getIdentificacion() {
+        return this.nombre + " " + this.cedula;
     }
 }
 

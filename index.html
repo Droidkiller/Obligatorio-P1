@@ -29,31 +29,31 @@ Aitana Alvarez (340201)
         <h3>Datos</h3>
         <div class="container">
             <h4>Carreras</h4>
-            <form class="formulario" id="formCarrera" onsubmit="agregarCarrera(event)">
+            <form class="formulario" id="formCarrera">
                 <label for="nombreCarrera">Nombre:</label>
                 <input type="text" id="nombreCarrera" required>
 
                 <label for="deptoCarrera">Departamento:</label>
                 <select required id="deptoCarrera">
-                    <option value="1" selected>Montevideo</option>
-                    <option value="2">Canelones</option>
-                    <option value="3">Maldonado</option>
-                    <option value="4">Rocha</option>
-                    <option value="5">Treinta y Tres</option>
-                    <option value="6">Cerro Largo</option>
-                    <option value="7">Rivera</option>
-                    <option value="8">Artigas</option>
-                    <option value="9">Salto</option>
-                    <option value="10">Paysandú</option>
-                    <option value="11">Río Negro</option>
-                    <option value="12">Soriano</option>
-                    <option value="13">Colonia</option>
-                    <option value="14">San José</option>
-                    <option value="15">Flores</option>
-                    <option value="16">Florida</option>
-                    <option value="17">Lavalleja</option>
-                    <option value="18">Durazno</option>
-                    <option value="19">Tacuarembó</option>
+                    <option value="Montevideo" selected>Montevideo</option>
+                    <option value="Canelones">Canelones</option>
+                    <option value="Maldonado">Maldonado</option>
+                    <option value="Rocha">Rocha</option>
+                    <option value="Treinta y Tres">Treinta y Tres</option>
+                    <option value="Cerro Largo">Cerro Largo</option>
+                    <option value="Rivera">Rivera</option>
+                    <option value="Artigas">Artigas</option>
+                    <option value="Salto">Salto</option>
+                    <option value="Paysandú">Paysandú</option>
+                    <option value="Río Negro">Río Negro</option>
+                    <option value="Soriano">Soriano</option>
+                    <option value="Colonia">Colonia</option>
+                    <option value="San José">San José</option>
+                    <option value="Flores">Flores</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Lavalleja">Lavalleja</option>
+                    <option value="Durazno">Durazno</option>
+                    <option value="Tacuarembó">Tacuarembó</option>
                 </select>
 
                 <label for="fechaCarrera">Fecha:</label>
@@ -61,13 +61,13 @@ Aitana Alvarez (340201)
 
                 <label for="cupoCarrera">Cupo:</label>
                 <input type="number" placeholder="30" required id="cupoCarrera" min="1" max="1000">
-                <button type="submit" id="bttnAgregarCarrera">Agregar Carrera</button>
+                <button id="bttnAgregarCarrera" onclick="agregarCarrera()">Agregar Carrera</button>
             </form>            
         </div>
         
         <div class="container">
             <h4>Patrocinadores</h4>
-            <form class="formulario" id="ingresoSponsor">
+            <form class="formulario" id="formSponsor">
                 <label for="nombreSponsor">Nombre:</label>
                 <input type="text" id="nombreSponsor">
 
@@ -83,15 +83,15 @@ Aitana Alvarez (340201)
                 </select>
 
                 <label>Carreras:</label>
-                <select id="carrerasSponsor" multiple></select>
+                <select id="carrerasSponsor" class="selectCarreras" multiple></select>
 
-                <button>Agregar/Actualizar Patrocinador</button>
+                <button id="bttnAgregarPatrocinador">Agregar/Actualizar Patrocinador</button>
             </form>            
         </div>
 
         <div class="container">
             <h4>Corredores</h4>
-            <form class="formulario" id="ingresoCorredor">
+            <form class="formulario" id="formCorredor">
                 <label for="nombreCorredor">Nombre:</label>
                 <input type="text" id="nombreCorredor">
 
@@ -107,16 +107,16 @@ Aitana Alvarez (340201)
                 <div class="radio-row">
                     <p class="radio-label">Tipo de corredor:</p>
                     <div class="radio-group">
-                        <input type="radio" id="elite" name="tipoCorredor">
+                        <input type="radio" id="elite" value="elite" name="tipoCorredor">
                         <label for="elite">Deportista de élite</label>
                     </div>
                     <div class="radio-group">
-                        <input type="radio" id="comun" name="tipoCorredor" checked>
+                        <input type="radio" id="comun" value="comun" name="tipoCorredor" checked>
                         <label for="comun">Deportista común</label>
                     </div>
                 </div>
                 
-                <button>Agregar Corredor</button>
+                <button id="bttnAgregarCorredor" onclick="agregarCorredor()">Agregar Corredor</button>
             </form>
         </div>
 
@@ -127,7 +127,7 @@ Aitana Alvarez (340201)
                 <select id="corredoresRegistrados"></select>
 
                 <label>Carreras:</label>
-                <select id="carrerasRegistradas"></select>
+                <select id="carrerasRegistradas" class="selectCarreras"></select>
 
                 <button>Inscribir</button>
             </form>
@@ -152,7 +152,7 @@ Aitana Alvarez (340201)
         <div class="container">
              <h4>Consulta inscriptos</h4>
                 <label for="idCarreraConsulta">Carrera:</label>
-                <select id="idCarreraConsulta"></select>
+                <select id="idCarreraConsulta" class="selectCarreras"></select>
 
                 <div class="radio-row">                    
                     <p class="radio-label">Ordenar por:</p>
