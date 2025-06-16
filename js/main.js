@@ -91,3 +91,13 @@ function agregarCorredor() {
         alert('No se pudo agregar el corredor. Revise los datos ingresados.');
     }
 }
+function agregarInscripcion() {
+    let form = document.getElementById('ingresoInscripciones');
+    let cedula = document.getElementById('corredoresRegistrados').value;
+    let nombreCarrera = document.getElementById('carrerasRegistradas').value;
+
+    if (!form.checkValidity()) {
+        return alert('Complete todos los datos de inscripción.');
+    }
+        
+}
