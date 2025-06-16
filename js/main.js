@@ -97,7 +97,25 @@ function agregarInscripcion() {
     let nombreCarrera = document.getElementById('carrerasRegistradas').value;
 
     if (!form.checkValidity()) {
-        return alert('Complete todos los datos de inscripción.');
+        alert('Complete todos los datos de inscripción.');
+        return;
     }
-        
+
+    let tempCorredores = [];
+    let corArray = sistema.corredores;
+    for (let i = 0; i < corArray.length; i++) {
+        if (corArray[i].cedula === cedula) tempCorredores.push(corArray[i]);
+    }
+    let tempCarreras = [];
+    let carArray = sistema.carreras;
+    for (let i = 0; i < carArray.length; i++) {
+        if (carArray[i].nombre === nombreCarrera) tempCarreras.push(carArray[i]);
+    }
+    if (tempCorredores.length === 0 || tempCarreras.length === 0) {
+        alert('Corredor o carrera no encontrado.');
+        return;
+    }
+    let corredor = tempCorredores[0];
+    let carrera = tempCarreras[0];
+    
 }
