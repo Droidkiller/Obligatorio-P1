@@ -27,6 +27,16 @@ class Sistema {
     agregarPatrocinador(patrocinador) {
         this.patrocinadores.push(patrocinador);
     }
+
+    verificarDuplicidadCarrera(nombre) {
+        let flag = false;
+        for(let i=0;i<this.carreras.length;i++ || !flag) {
+            if (this.carreras[i].nombre === nombre) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
 }
 
 class Carrera {

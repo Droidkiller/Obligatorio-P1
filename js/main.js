@@ -9,22 +9,17 @@ var sistema = new Sistema();
 function inicio() {
     const bttnDatos = document.getElementById('bttnDatos');
     const bttnEstadisticas = document.getElementById('bttnEstadisticas');
-    const divDatos = document.getElementById('divDatos');
-    const divEstadisticas = document.getElementById('divEstadisticas');
+    const bttnAgregarCarrera = document.getElementById('bttnAgregarCarrera');
+    const bttnAgregarPatrocinador = document.getElementById('bttnAgregarPatrocinador');
+    const bttnAgregarCorredor = document.getElementById('bttnAgregarCorredor');
+    const bttnInscripcion = document.getElementById('bttnInscripcion'); 
 
-    bttnDatos.addEventListener('click', () => {
-        divDatos.style.display = 'block';
-        divEstadisticas.style.display = 'none';
-        bttnDatos.style.backgroundColor = 'red';
-        bttnEstadisticas.style.backgroundColor = '#f0f0f0';
-    });
-
-    bttnEstadisticas.addEventListener('click', () => {
-        divDatos.style.display = 'none';
-        divEstadisticas.style.display = 'block';
-        bttnDatos.style.backgroundColor = '#f0f0f0';
-        bttnEstadisticas.style.backgroundColor = 'red';
-    });
+    bttnAgregarCarrera.addEventListener('click', agregarCarrera);
+    bttnAgregarPatrocinador.addEventListener('click', agregarPatrocinador);
+    bttnAgregarCorredor.addEventListener('click', agregarCorredor);
+    bttnEstadisticas.addEventListener('click', mostrarEstadisticas)
+    bttnDatos.addEventListener('click', mostrarDatos);
+    bttnInscripcion.addEventListener('click', agregarInscripcion);
 }
 
 
@@ -36,18 +31,23 @@ function agregarCarrera() {
     let cupo = document.getElementById('cupoCarrera').value;
     
     if(form.checkValidity()) {
+        debugger
         let carrera = new Carrera(nombre, depto, fecha, cupo);
-        console.log(carrera);
-        sistema.agregarCarrera(carrera);
-        form.reset();
-        alert('Carrera agregada exitosamente');
-        let selects = document.querySelectorAll('.selectCarreras');
-        selects.forEach(select => {
-            let option = document.createElement('option');
-            option.value = carrera.nombre;
-            option.text = carrera.nombre;
-            select.appendChild(option);            
-        });
+        if(!sistema.verificarDuplicidadCarrera(carrera.nombre)) {
+            console.log(carrera);
+            sistema.agregarCarrera(carrera);
+            let selects = document.querySelectorAll('.selectCarreras');
+            selects.forEach(select => {
+                let option = document.createElement('option');
+                option.value = carrera.nombre;
+                option.text = carrera.nombre;
+                select.appendChild(option);            
+            });
+            form.reset();
+            alert('Carrera agregada exitosamente');
+        } else {
+            alert('Ya existe una carrera con ese nombre. Por favor, ingrese un nombre diferente.');
+        }
     } else {
         alert('No se pudo agregar la carrera. Revise los datos ingresados.');
     }
@@ -92,6 +92,7 @@ function agregarCorredor() {
     }
 }
 function agregarInscripcion() {
+    debugger
     let form = document.getElementById('ingresoInscripciones');
     let cedula = document.getElementById('corredoresRegistrados').value;
     let nombreCarrera = document.getElementById('carrerasRegistradas').value;
@@ -118,4 +119,22 @@ function agregarInscripcion() {
     let corredor = tempCorredores[0];
     let carrera = tempCarreras[0];
     
+}
+
+function mostrarEstadisticas() {
+    const divEstadisticas = document.getElementById('containerEstadisticas');
+    const divDatos = document.getElementById('containerDatos');
+    divDatos.style.display = 'none';
+    divEstadisticas.style.display = 'block';
+    bttnDatos.style.backgroundColor = '#f0f0f0';
+    bttnEstadisticas.style.backgroundColor = 'red';
+}
+
+function mostrarDatos() {
+    const divEstadisticas = document.getElementById('containerEstadisticas');
+    const divDatos = document.getElementById('containerDatos');
+    divDatos.style.display = 'block';
+    divEstadisticas.style.display = 'none';
+    bttnDatos.style.backgroundColor = 'red';
+    bttnEstadisticas.style.backgroundColor = '#f0f0f0';
 }

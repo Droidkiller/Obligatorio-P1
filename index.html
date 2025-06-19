@@ -14,189 +14,191 @@ Aitana Alvarez (340201)
     <title>Corredores de Uruguay</title>
 </head>
 <body>
-    <div class="cabecera">
-        <h1>Sitio de Corredores</h1>
-        <img src="img/corredores.jpg" alt="Imagen de gente corriendo">
-    </div>
-    <br>
-
-    <div class="botones-cabecera">
-        <button id="bttnDatos">Datos</button>
-        <button id="bttnEstadisticas">Estadísticas</button>
-    </div>
+    <main>
+        <div class="cabecera">
+            <h1>Sitio de Corredores</h1>
+            <img src="img/corredores.jpg" alt="Imagen de gente corriendo">
+        </div>
+        <br>
     
-    <div id ="divDatos" class="big-container">
-        <h3>Datos</h3>
-        <div class="container">
-            <h4>Carreras</h4>
-            <form class="formulario" id="formCarrera">
-                <label for="nombreCarrera">Nombre:</label>
-                <input type="text" id="nombreCarrera" required>
-
-                <label for="deptoCarrera">Departamento:</label>
-                <select required id="deptoCarrera">
-                    <option value="Montevideo" selected>Montevideo</option>
-                    <option value="Canelones">Canelones</option>
-                    <option value="Maldonado">Maldonado</option>
-                    <option value="Rocha">Rocha</option>
-                    <option value="Treinta y Tres">Treinta y Tres</option>
-                    <option value="Cerro Largo">Cerro Largo</option>
-                    <option value="Rivera">Rivera</option>
-                    <option value="Artigas">Artigas</option>
-                    <option value="Salto">Salto</option>
-                    <option value="Paysandú">Paysandú</option>
-                    <option value="Río Negro">Río Negro</option>
-                    <option value="Soriano">Soriano</option>
-                    <option value="Colonia">Colonia</option>
-                    <option value="San José">San José</option>
-                    <option value="Flores">Flores</option>
-                    <option value="Florida">Florida</option>
-                    <option value="Lavalleja">Lavalleja</option>
-                    <option value="Durazno">Durazno</option>
-                    <option value="Tacuarembó">Tacuarembó</option>
-                </select>
-
-                <label for="fechaCarrera">Fecha:</label>
-                <input type="date" id="fechaCarrera" required>
-
-                <label for="cupoCarrera">Cupo:</label>
-                <input type="number" placeholder="30" required id="cupoCarrera" min="1" max="1000">
-                <button id="bttnAgregarCarrera" onclick="agregarCarrera()">Agregar Carrera</button>
-            </form>            
-        </div>
+        <nav class="botones-cabecera">
+            <button id="bttnDatos">Datos</button>
+            <button id="bttnEstadisticas">Estadísticas</button>
+        </nav>
         
-        <div class="container">
-            <h4>Patrocinadores</h4>
-            <form class="formulario" id="formSponsor">
-                <label for="nombreSponsor">Nombre:</label>
-                <input type="text" id="nombreSponsor">
-
-                <label>Rubro:</label>
-                <select>
-                    <option value="Alimenticio" selected>Alimenticio</option>
-                    <option value="Banco">Banco</option>
-                    <option value="Bebidas">Bebidas</option>
-                    <option value="Farmacia">Farmacia</option>
-                    <option value="Ropa deportiva">Ropa deportiva</option>
-                    <option value="Estatal">Estatal</option>  
-                    <option value="General">General</option>
-                </select>
-
-                <label>Carreras:</label>
-                <select id="carrerasSponsor" class="selectCarreras" multiple></select>
-
-                <button id="bttnAgregarPatrocinador">Agregar/Actualizar Patrocinador</button>
-            </form>            
-        </div>
-
-        <div class="container">
-            <h4>Corredores</h4>
-            <form class="formulario" id="formCorredor">
-                <label for="nombreCorredor">Nombre:</label>
-                <input type="text" id="nombreCorredor">
-
-                <label for="edad">Edad:</label>
-                <input type="text" id="edad">
-
-                <label for="cedula">Cédula:</label>
-                <input type="text" id="cedula">
-
-                <label for="fechaMedica">Fecha de vencimiento de ficha médica:</label>
-                <input type="date" id="fechaMedica">
-
+        <section id ="containerDatos" class="big-container">
+            <h3>Datos</h3>
+            <article class="container">
+                <h4>Carreras</h4>
+                <form class="formulario" id="formCarrera">
+                    <label for="nombreCarrera">Nombre:</label>
+                    <input type="text" id="nombreCarrera" required>
+    
+                    <label for="deptoCarrera">Departamento:</label>
+                    <select required id="deptoCarrera">
+                        <option value="Montevideo" selected>Montevideo</option>
+                        <option value="Canelones">Canelones</option>
+                        <option value="Maldonado">Maldonado</option>
+                        <option value="Rocha">Rocha</option>
+                        <option value="Treinta y Tres">Treinta y Tres</option>
+                        <option value="Cerro Largo">Cerro Largo</option>
+                        <option value="Rivera">Rivera</option>
+                        <option value="Artigas">Artigas</option>
+                        <option value="Salto">Salto</option>
+                        <option value="Paysandú">Paysandú</option>
+                        <option value="Río Negro">Río Negro</option>
+                        <option value="Soriano">Soriano</option>
+                        <option value="Colonia">Colonia</option>
+                        <option value="San José">San José</option>
+                        <option value="Flores">Flores</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Lavalleja">Lavalleja</option>
+                        <option value="Durazno">Durazno</option>
+                        <option value="Tacuarembó">Tacuarembó</option>
+                    </select>
+    
+                    <label for="fechaCarrera">Fecha:</label>
+                    <input type="date" id="fechaCarrera" required>
+    
+                    <label for="cupoCarrera">Cupo:</label>
+                    <input type="number" placeholder="30" required id="cupoCarrera" min="30" max="1000">
+                    <button id="bttnAgregarCarrera">Agregar Carrera</button>
+                </form>            
+            </article>
+            
+            <article class="container">
+                <h4>Patrocinadores</h4>
+                <form class="formulario" id="formSponsor">
+                    <label for="nombreSponsor">Nombre:</label>
+                    <input type="text" id="nombreSponsor" required>
+    
+                    <label>Rubro:</label>
+                    <select required>
+                        <option value="Alimenticio" selected>Alimenticio</option>
+                        <option value="Banco">Banco</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Farmacia">Farmacia</option>
+                        <option value="Ropa deportiva">Ropa deportiva</option>
+                        <option value="Estatal">Estatal</option>  
+                        <option value="General">General</option>
+                    </select>
+    
+                    <label>Carreras:</label>
+                    <select id="carrerasSponsor" class="selectCarreras" multiple required></select>
+    
+                    <button id="bttnAgregarPatrocinador">Agregar/Actualizar Patrocinador</button>
+                </form>            
+            </article>
+    
+            <article class="container">
+                <h4>Corredores</h4>
+                <form class="formulario" id="formCorredor">
+                    <label for="nombreCorredor">Nombre:</label>
+                    <input type="text" id="nombreCorredor" required>
+    
+                    <label for="edad">Edad:</label>
+                    <input type="text" id="edad" required>
+    
+                    <label for="cedula">Cédula:</label>
+                    <input type="text" id="cedula" required>
+    
+                    <label for="fechaMedica">Fecha de vencimiento de ficha médica:</label>
+                    <input type="date" id="fechaMedica" required>
+    
+                    <div class="radio-row">
+                        <p class="radio-label">Tipo de corredor:</p>
+                        <div class="radio-group">
+                            <input type="radio" id="elite" value="elite" name="tipoCorredor">
+                            <label for="elite">Deportista de élite</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="comun" value="comun" name="tipoCorredor" checked>
+                            <label for="comun">Deportista común</label>
+                        </div>
+                    </div>
+                    
+                    <button id="bttnAgregarCorredor" onclick="agregarCorredor()">Agregar Corredor</button>
+                </form>
+            </article>
+    
+            <article class="container">
+                <h4>Inscripciones</h4>
+                <form class="formulario" id="ingresoInscripciones">
+                    <label>Corredores:</label>
+                    <select id="corredoresRegistrados" required></select>
+    
+                    <label>Carreras:</label>
+                    <select id="carrerasRegistradas" class="selectCarreras" required></select>
+    
+                    <button id="bttnInscripcion">Inscribir</button>
+                </form>
+            </article>
+        </section>
+    
+        <section id ="containerEstadisticas" class="big-container">
+            <h3>Estadísticas</h3>
+            <article class="container">
+                <h4>Datos generales</h4>
+                <p> Promedio de inscriptos por carrera: sin datos</p>
+                <p>Carrera/s con más inscriptos:</p>
+                <ul id="IdMasInscriptos">
+                    <li> sin datos</li>
+                </ul>
+                <p>Carrera/s sin inscriptos ordenadas por fecha:</p>
+                <ul id="IdOrdenados">
+                    <li> sin datos</li>
+                </ul>
+                <p>Porcentaje de corredores de elite: sin datos</p>
+            </article>
+            <article class="container">
+                 <h4>Consulta inscriptos</h4>
+                    <label for="idCarreraConsulta">Carrera:</label>
+                    <select id="idCarreraConsulta" class="selectCarreras" required></select>
+    
+                    <div class="radio-row">                    
+                        <p class="radio-label">Ordenar por:</p>
+                        <div class="radio-group">
+                            <input type="radio" name="orden" id="idOrdenNombre" checked>
+                            <label for="idOrdenNombre">Nombre</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="orden" id="idOrdenNumero">
+                            <label for="idOrdenNumero">Número</label>
+                        </div>
+                    </div>
+    
+                    
+                    <table class="datos" id="tablaDatos">
+                        <caption>Inscriptos</caption>
+                        <thead>
+                            <tr class="filaSuperior">
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>Cédula </th>
+                                <th>Ficha Médica</th>
+                                <th>Número</th>
+                            </tr>
+                        </thead>
+                    </table>
+             </article>
+             <article class="container">
+                <h4>Visualizar Mapa:</h4>
                 <div class="radio-row">
-                    <p class="radio-label">Tipo de corredor:</p>
                     <div class="radio-group">
-                        <input type="radio" id="elite" value="elite" name="tipoCorredor">
-                        <label for="elite">Deportista de élite</label>
+                        <input type="radio" name="mapa" id="idMapaCarreras" checked>
+                        <label for="idMapaCarreras">Por Carreras</label>
                     </div>
                     <div class="radio-group">
-                        <input type="radio" id="comun" value="comun" name="tipoCorredor" checked>
-                        <label for="comun">Deportista común</label>
+                        <input type="radio" name="mapa" id="idMapaInscriptos">
+                        <label for="idMapaInscriptos">Por Inscripciones</label>
                     </div>
                 </div>
-                
-                <button id="bttnAgregarCorredor" onclick="agregarCorredor()">Agregar Corredor</button>
-            </form>
-        </div>
-
-        <div class="container">
-            <h4>Inscripciones</h4>
-            <form class="formulario" id="ingresoInscripciones">
-                <label>Corredores:</label>
-                <select id="corredoresRegistrados"></select>
-
-                <label>Carreras:</label>
-                <select id="carrerasRegistradas" class="selectCarreras"></select>
-
-                <button>Inscribir</button>
-            </form>
-        </div>
-    </div>
-
-    <div id ="divEstadisticas" class="big-container">
-        <h3>Estadísticas</h3>
-        <div class="container">
-            <h4>Datos generales</h4>
-            <p> Promedio de inscriptos por carrera: sin datos</p>
-            <p>Carrera/s con más inscriptos:</p>
-            <ul id="IdMasInscriptos">
-                <li> sin datos</li>
-            </ul>
-            <p>Carrera/s sin inscriptos ordenadas por fecha:</p>
-            <ul id="IdOrdenados">
-                <li> sin datos</li>
-            </ul>
-            <p>Porcentaje de corredores de elite: sin datos</p>
-        </div>
-        <div class="container">
-             <h4>Consulta inscriptos</h4>
-                <label for="idCarreraConsulta">Carrera:</label>
-                <select id="idCarreraConsulta" class="selectCarreras"></select>
-
-                <div class="radio-row">                    
-                    <p class="radio-label">Ordenar por:</p>
-                    <div class="radio-group">
-                        <input type="radio" name="orden" id="idOrdenNombre" checked>
-                        <label for="idOrdenNombre">Nombre</label>
-                    </div>
-                    <div class="radio-group">
-                        <input type="radio" name="orden" id="idOrdenNumero">
-                        <label for="idOrdenNumero">Número</label>
-                    </div>
+                <div id="containerMapa">
+    
                 </div>
-
-                
-                <table class="datos" id="tablaDatos">
-                    <caption>Inscriptos</caption>
-                    <thead>
-                        <tr class="filaSuperior">
-                            <th>Nombre</th>
-                            <th>Edad</th>
-                            <th>Cédula </th>
-                            <th>Ficha Médica</th>
-                            <th>Número</th>
-                        </tr>
-                    </thead>
-                </table>
-         </div>
-         <div class="container">
-            <h4>Visualizar Mapa:</h4>
-            <div class="radio-row">
-                <div class="radio-group">
-                    <input type="radio" name="mapa" id="idMapaCarreras" checked>
-                    <label for="idMapaCarreras">Por Carreras</label>
-                </div>
-                <div class="radio-group">
-                    <input type="radio" name="mapa" id="idMapaInscriptos">
-                    <label for="idMapaInscriptos">Por Inscripciones</label>
-                </div>
-            </div>
-            <div id="containerMapa">
-
-            </div>
-        </div>
-    </div>
+            </article>
+        </section>
+    </main>
     
     <footer>
         <p>Programación 1 - Obligatorio 1er semestre 2025 - Autores:</p>
