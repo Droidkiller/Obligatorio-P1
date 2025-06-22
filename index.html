@@ -11,6 +11,7 @@ Aitana Alvarez (340201)
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <script src="js/clases.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <title>Corredores de Uruguay</title>
 </head>
 <body>
@@ -73,7 +74,7 @@ Aitana Alvarez (340201)
                     <input type="text" id="nombreSponsor" required>
     
                     <label>Rubro:</label>
-                    <select required>
+                    <select required id="rubroSponsor">
                         <option value="Alimenticio" selected>Alimenticio</option>
                         <option value="Banco">Banco</option>
                         <option value="Bebidas">Bebidas</option>
@@ -108,16 +109,16 @@ Aitana Alvarez (340201)
                     <div class="radio-row">
                         <p class="radio-label">Tipo de corredor:</p>
                         <div class="radio-group">
-                            <input type="radio" id="elite" value="elite" name="tipoCorredor">
+                            <input type="radio" id="elite" value="Elite" name="tipoCorredor">
                             <label for="elite">Deportista de élite</label>
                         </div>
                         <div class="radio-group">
-                            <input type="radio" id="comun" value="comun" name="tipoCorredor" checked>
+                            <input type="radio" id="comun" value="Comun" name="tipoCorredor" checked>
                             <label for="comun">Deportista común</label>
                         </div>
                     </div>
                     
-                    <button id="bttnAgregarCorredor" onclick="agregarCorredor()">Agregar Corredor</button>
+                    <button id="bttnAgregarCorredor">Agregar Corredor</button>
                 </form>
             </article>
     

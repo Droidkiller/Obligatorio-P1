@@ -37,6 +37,59 @@ class Sistema {
         }
         return flag;
     }
+
+    verificarDuplicidadPatrocinador(patrocinador) {
+        let duplicado = false;
+        for (let i = 0; i < this.patrocinadores.length;i++ || !duplicado) {
+            if (this.patrocinadores[i].nombre === patrocinador.nombre) {
+                this.patrocinadores[i].rubro = patrocinador.rubro;
+                this.patrocinadores[i].carreras = patrocinador.carreras;
+                duplicado = true;
+            }
+        }
+        return duplicado;
+    }
+
+    verificarDuplicidadCorredor(cedula) {
+        let flag = false;
+        for(let i=0;i<this.corredores.length;i++ || !flag) {
+            if (this.corredores[i].cedula === cedula) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    validarInscripcion(corredor, carrera) {
+        debugger;
+        let flag = true;
+        let cont = 0;
+        if(corredor.fechaFicha < carrera.fecha) {
+            alert("La fecha de la ficha médica del corredor está vencida.");
+            flag = false;
+        }
+        for(let i=0;i<this.inscripciones.length;i++) {
+            if(this.inscripciones[i].carreras.nombre == carrera.nombre) {
+                cont++;
+            }
+        }
+        if(cont >= carrera.cupo) {
+            alert("La carrera " + carrera.nombre + " ya ha alcanzado su cupo máximo de inscripciones.");
+            flag = false;
+        }        
+        return flag;
+    }
+
+    getPatrocinadores(nombreCarrera) {
+        let patrocinadores = [];
+        for (let i = 0; i < this.patrocinadores.length; i++) {
+            if (this.patrocinadores[i].carreras.includes(nombreCarrera)) {
+                patrocinadores.push(this.patrocinadores[i].toString());
+            }
+        }
+        return patrocinadores;
+    }
+
 }
 
 class Carrera {
@@ -78,5 +131,9 @@ class Patrocinador {
         this.nombre = nombre;
         this.rubro = rubro;
         this.carreras = carreras;
+    }
+
+    toString() {
+        return this.nombre + " (" + this.rubro + ")";
     }
 }
