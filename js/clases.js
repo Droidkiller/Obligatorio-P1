@@ -98,6 +98,7 @@ class Carrera {
         this.departamento = depto;
         this.fecha = fecha;
         this.cupo = cupo;
+        this.numero = 1;
     }
 }
 

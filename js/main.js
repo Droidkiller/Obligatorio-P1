@@ -6,7 +6,6 @@ Aitana Alvarez (340201)
 
 window.addEventListener('load', inicio);
 var sistema = new Sistema();
-var numeroCarrera = 1;
 
 function inicio() {
     const bttnDatos = document.getElementById('bttnDatos');
@@ -148,23 +147,23 @@ function agregarInscripcion(event) {
             sistema.agregarInscripcion(inscripcion);
             console.log(inscripcion);
             form.reset();
-            alert('Número: ' + numeroCarrera + 
-                "\nNombre: " + corredor.nombre + " " + corredor.edad + " años, CI: " + corredor.cedula + " Ficha Medica " + corredor.fechaFicha +
-                "\n" + corredor.tipo + 
-                "\nCarrera: " + carrera.nombre + " en " + carrera.departamento + " el " + carrera.fecha + " Cupo: " + carrera.cupo +
-                "\n" + sistema.getPatrocinadores(carrera.nombre)
-            );
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-
             const texto = 
-                'Número: ' + numeroCarrera + '\n' +
+                'Número: ' + carrera.numero + '\n' +
                 'Nombre: ' + corredor.nombre + ' ' + corredor.edad + ', CI: ' + corredor.cedula + ' ' + corredor.fechaFicha + '\n' +
                 corredor.tipo + '\n' +
                 'Carrera: ' + carrera.nombre + ' en ' + carrera.departamento + ' el ' + carrera.fecha + ' Cupo: ' + carrera.cupo + '\n' +
                 sistema.getPatrocinadores(carrera.nombre);
             doc.text(doc.splitTextToSize(texto, 180), 10, 10);
             doc.save('inscripcion.pdf');
+            alert('Número: ' + carrera.numero + 
+                "\nNombre: " + corredor.nombre + " " + corredor.edad + " años, CI: " + corredor.cedula + " Ficha Medica " + corredor.fechaFicha +
+                "\n" + corredor.tipo + 
+                "\nCarrera: " + carrera.nombre + " en " + carrera.departamento + " el " + carrera.fecha + " Cupo: " + carrera.cupo +
+                "\n" + sistema.getPatrocinadores(carrera.nombre)
+            );
+            carrera.numero++;
         }
     } else {
         alert('Complete todos los datos de inscripción.');
