@@ -285,6 +285,8 @@ function mostrarEstadisticas() {
     divEstadisticas.style.display = 'block';
     bttnDatos.style.backgroundColor = '#f0f0f0';
     bttnEstadisticas.style.backgroundColor = 'red';
+    actualizarCarrerasConMasInscriptos();
+    promedio();
 }
 
 function mostrarDatos() {
@@ -295,3 +297,56 @@ function mostrarDatos() {
     bttnDatos.style.backgroundColor = 'red';
     bttnEstadisticas.style.backgroundColor = '#f0f0f0';
 }
+
+function actualizarCarrerasConMasInscriptos() {
+    let carrerasConMasInscriptos = sistema.carreras.slice();
+
+    carrerasConMasInscriptos.sort((a, b) => {
+        let contadorA = 0;
+        for (let i = 0; i < sistema.inscripciones.length; i++) {
+            if (sistema.inscripciones[i].carreras.nombre === a.nombre) {
+                contadorA = contadorA + 1;
+            }
+        }
+        let contadorB = 0;
+        for (let i = 0; i < sistema.inscripciones.length; i++) {
+            if (sistema.inscripciones[i].carreras.nombre === b.nombre) {
+                contadorB = contadorB + 1;
+            }
+        }
+        return contadorB - contadorA;
+    });
+
+    let ul = document.getElementById("IdMasInscriptos");
+    ul.innerHTML = "";
+
+    for (let i = 0; i < carrerasConMasInscriptos.length; i++) {
+        let carrera = carrerasConMasInscriptos[i];
+        let li = document.createElement("li");
+        let texto = carrera.nombre +
+                    ' en ' + carrera.departamento +
+                    ' el ' + carrera.fecha +
+                    ' Cupo: ' + carrera.cupo + '\n' +
+                    sistema.getPatrocinadores(carrera.nombre);
+        li.textContent = texto;
+        ul.appendChild(li);
+    }
+}
+function calcularPromedioInscriptosPorCarrera() {
+    let totalInscriptos = 0;
+    for (let i = 0; i < sistema.inscripciones.length; i++) {
+        totalInscriptos = totalInscriptos + 1;
+    }
+    let cantidadCarreras = sistema.carreras.length;
+    let promedio = 0;
+    if (cantidadCarreras > 0) {
+        promedio = totalInscriptos / cantidadCarreras;
+    }
+    return promedio;
+}
+function promedio() {
+    // obtengo el promedio y lo redondeo a 2 decimales
+    let promedio = calcularPromedioInscriptosPorCarrera().toFixed(2);
+    document.getElementById("idPromedioInscripto").innerHTML = promedio.toString();
+}
+
