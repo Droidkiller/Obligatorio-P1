@@ -29,6 +29,14 @@ function inicio() {
     });
     bttnEstadisticas.addEventListener('click', mostrarEstadisticas)
     bttnDatos.addEventListener('click', mostrarDatos);
+
+    google.charts.load('current', {
+        'packages': ['geochart']
+    });
+    google.charts.setOnLoadCallback(dibujarMapa);
+    document.querySelectorAll('input[name="mapa"]').forEach(radio => {
+        radio.addEventListener('change', dibujarMapa);
+    });
 }
 
 
@@ -168,6 +176,106 @@ function agregarInscripcion(event) {
     } else {
         alert('Complete todos los datos de inscripción.');
     }    
+}
+
+function dibujarMapa() {
+    let selected = document.querySelector('input[name="mapa"]:checked').value;
+    let dataRows = [];
+
+    if (selected == 'mapaCarreras') {
+        dataRows = dataRows.concat(getCarrerasPorDepartamento());
+    } else {
+        dataRows = dataRows.concat(getInscripcionesPorDepartamento());
+    }
+
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'Region');
+    data.addColumn('number', selected == 'mapaCarreras' ? 'Carreras' : 'Inscripciones');
+    data.addColumn({type: 'string', role: 'tooltip'});
+    data.addRows(dataRows);
+
+    const options = {
+        region: 'UY',
+        displayMode: 'regions',
+        resolution: 'provinces',
+        colorAxis: {
+            minValue: 0,
+            maxValue: 1,
+            colors: ['#e0f3f8', '#08306b'] // light blue to dark blue
+        },
+        width: 600,
+        height: 400 
+    };
+
+    const chart = new google.visualization.GeoChart(document.getElementById('containerMapa'));
+    chart.draw(data, options);
+}
+
+function getCarrerasPorDepartamento() {
+    const departamentos = [
+        ['UY-MO', 'Montevideo'],
+        ['UY-AR', 'Artigas'],
+        ['UY-CA', 'Canelones'],
+        ['UY-CL', 'Cerro Largo'],
+        ['UY-CO', 'Colonia'],
+        ['UY-DU', 'Durazno'],
+        ['UY-FD', 'Florida'],
+        ['UY-FS', 'Flores'],
+        ['UY-LA', 'Lavalleja'],
+        ['UY-MA', 'Maldonado'],
+        ['UY-PA', 'Paysandú'],
+        ['UY-RN', 'Río Negro'],
+        ['UY-RO', 'Rocha'],
+        ['UY-RV', 'Rivera'],
+        ['UY-SA', 'Salto'],
+        ['UY-SJ', 'San José'],
+        ['UY-SO', 'Soriano'],
+        ['UY-TA', 'Tacuarembó'],
+        ['UY-TT', 'Treinta y Tres']
+    ];
+
+    let resultados = [];
+    for (let i = 0; i < departamentos.length; i++) {
+        let [codigo, nombre] = departamentos[i];
+        let cantidad = sistema.getCantidadCarrerasPorDepartamento(nombre);
+        resultados.push([codigo, cantidad, `${nombre}: ${cantidad} carreras`]);
+    }
+
+    return resultados;
+}
+
+
+function getInscripcionesPorDepartamento() {
+    const departamentos = [
+        ['UY-MO', 'Montevideo'],
+        ['UY-AR', 'Artigas'],
+        ['UY-CA', 'Canelones'],
+        ['UY-CL', 'Cerro Largo'],
+        ['UY-CO', 'Colonia'],
+        ['UY-DU', 'Durazno'],
+        ['UY-FD', 'Florida'],
+        ['UY-FS', 'Flores'],
+        ['UY-LA', 'Lavalleja'],
+        ['UY-MA', 'Maldonado'],
+        ['UY-PA', 'Paysandú'],
+        ['UY-RN', 'Río Negro'],
+        ['UY-RO', 'Rocha'],
+        ['UY-RV', 'Rivera'],
+        ['UY-SA', 'Salto'],
+        ['UY-SJ', 'San José'],
+        ['UY-SO', 'Soriano'],
+        ['UY-TA', 'Tacuarembó'],
+        ['UY-TT', 'Treinta y Tres']
+    ];
+
+    let resultados = [];
+    for (let i = 0; i < departamentos.length; i++) {
+        let [codigo, nombre] = departamentos[i];
+        let cantidad = sistema.getCantidadInscripcionesPorDepartamento(nombre);
+        resultados.push([codigo, cantidad, `${nombre}: ${cantidad} inscripciones`]);
+    }
+
+    return resultados;
 }
 
 function mostrarEstadisticas() {

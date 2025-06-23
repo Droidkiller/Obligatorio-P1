@@ -90,6 +90,24 @@ class Sistema {
         return patrocinadores;
     }
 
+    getCantidadCarrerasPorDepartamento(departamento) {
+        let cantidad = 0;
+        for (let i = 0; i < this.carreras.length; i++) {
+            if (this.carreras[i].departamento == departamento) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
+    getCantidadInscripcionesPorDepartamento(departamento) {
+        let cantidad = 0;
+        for (let i = 0; i < this.inscripciones.length; i++) {
+            if (this.inscripciones[i].carreras.departamento == departamento) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
 }
 
 class Carrera {
