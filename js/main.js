@@ -288,6 +288,9 @@ function mostrarEstadisticas() {
     actualizarCarrerasConMasInscriptos();
     promedio();
     actualizarCarrerasSinInscriptos();
+    let porcentajeElite = calcularPorcentajeElite();
+    document.getElementById('idPorcentajeElite').innerHTML = porcentajeElite + '%';
+
 }
 
 function mostrarDatos() {
@@ -360,20 +363,26 @@ function promedio() {
 }
 
 function actualizarCarrerasSinInscriptos() {
-    let carrerasSinInscriptos = [];
+    let ul = document.getElementById("IdOrdenados");
+    ul.innerHTML = "";
+
+    // 1) estado inicial: sin carreras o sin inscripciones
+    if (sistema.carreras.length === 0 || sistema.inscripciones.length === 0) {
+        let li = document.createElement("li");
+        li.textContent = "sin datos";
+        ul.appendChild(li);
+        return;
+    }
+    let carrerasSin = [];
     for (let i = 0; i < sistema.carreras.length; i++) {
         let carrera = sistema.carreras[i];
-        let cont = 0;
-        for (let j = 0; j < sistema.inscripciones.length; j++) {
-            if (sistema.inscripciones[j].carreras.nombre === carrera.nombre) {
-                cont = cont + 1;
-            }
-        }
-        if (cont === 0) {
-            carrerasSinInscriptos.push(carrera);
+        let contIns = sistema.getCantidadInscripciones(carrera.nombre);
+        if (contIns === 0) {
+            carrerasSin.push(carrera);
         }
     }
-    carrerasSinInscriptos.sort(function(a, b) {
+
+    carrerasSin.sort(function(a, b) {
         if (a.fecha < b.fecha) {
             return -1;
         } else {
@@ -381,18 +390,39 @@ function actualizarCarrerasSinInscriptos() {
         }
     });
 
-    let ul = document.getElementById("IdOrdenados");
-    ul.innerHTML = "";  // limpio lista previa
-
-    for (let i = 0; i < carrerasSinInscriptos.length; i++) {
-        let carrera = carrerasSinInscriptos[i];
+    if (carrerasSin.length === 0) {
         let li = document.createElement("li");
-        let texto = carrera.nombre +
-                    ' en ' + carrera.departamento +
-                    ' el ' + carrera.fecha +
-                    ' Cupo: ' + carrera.cupo;
-        li.textContent = texto;
+        li.textContent = "sin datos";
+        ul.appendChild(li);
+        return;
+    }
+
+    for (let i = 0; i < carrerasSin.length; i++) {
+        let carrera = carrerasSin[i];
+        let li = document.createElement("li");
+        li.textContent = carrera.nombre
+                          + " en " + carrera.departamento
+                          + " el " + carrera.fecha
+                          + " Cupo: " + carrera.cupo;
         ul.appendChild(li);
     }
+}
+
+function calcularPorcentajeElite() {
+    let cantidadElite = 0;
+    let totalCorredores = sistema.corredores.length;
+    let porcentajeFinal = '0.00';
+
+    if (totalCorredores > 0) {
+        for (let i = 0; i < sistema.corredores.length; i++) {
+            if (sistema.corredores[i].tipo === 'Elite') {
+                cantidadElite++;
+            }
+        }
+        let porcentaje = (cantidadElite * 100) / totalCorredores;
+        porcentajeFinal = porcentaje.toFixed(2);
+    }
+
+    return porcentajeFinal;
 }
 
