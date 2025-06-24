@@ -363,26 +363,20 @@ function promedio() {
 }
 
 function actualizarCarrerasSinInscriptos() {
-    let ul = document.getElementById("IdOrdenados");
-    ul.innerHTML = "";
-
-    // 1) estado inicial: sin carreras o sin inscripciones
-    if (sistema.carreras.length === 0 || sistema.inscripciones.length === 0) {
-        let li = document.createElement("li");
-        li.textContent = "sin datos";
-        ul.appendChild(li);
-        return;
-    }
-    let carrerasSin = [];
+    let carrerasSinInscriptos = [];
     for (let i = 0; i < sistema.carreras.length; i++) {
         let carrera = sistema.carreras[i];
-        let contIns = sistema.getCantidadInscripciones(carrera.nombre);
-        if (contIns === 0) {
-            carrerasSin.push(carrera);
+        let cont = 0;
+        for (let j = 0; j < sistema.inscripciones.length; j++) {
+            if (sistema.inscripciones[j].carreras.nombre === carrera.nombre) {
+                cont = cont + 1;
+            }
+        }
+        if (cont === 0) {
+            carrerasSinInscriptos.push(carrera);
         }
     }
-
-    carrerasSin.sort(function(a, b) {
+    carrerasSinInscriptos.sort(function(a, b) {
         if (a.fecha < b.fecha) {
             return -1;
         } else {
@@ -390,24 +384,20 @@ function actualizarCarrerasSinInscriptos() {
         }
     });
 
-    if (carrerasSin.length === 0) {
-        let li = document.createElement("li");
-        li.textContent = "sin datos";
-        ul.appendChild(li);
-        return;
-    }
+    let ul = document.getElementById("IdOrdenados");
+    ul.innerHTML = "";  // limpio lista previa
 
-    for (let i = 0; i < carrerasSin.length; i++) {
-        let carrera = carrerasSin[i];
+    for (let i = 0; i < carrerasSinInscriptos.length; i++) {
+        let carrera = carrerasSinInscriptos[i];
         let li = document.createElement("li");
-        li.textContent = carrera.nombre
-                          + " en " + carrera.departamento
-                          + " el " + carrera.fecha
-                          + " Cupo: " + carrera.cupo;
+        let texto = carrera.nombre +
+                    ' en ' + carrera.departamento +
+                    ' el ' + carrera.fecha +
+                    ' Cupo: ' + carrera.cupo;
+        li.textContent = texto;
         ul.appendChild(li);
     }
 }
-
 function calcularPorcentajeElite() {
     let cantidadElite = 0;
     let totalCorredores = sistema.corredores.length;
