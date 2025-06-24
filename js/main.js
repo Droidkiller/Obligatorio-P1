@@ -350,3 +350,47 @@ function promedio() {
     document.getElementById("idPromedioInscripto").innerHTML = promedio.toString();
 }
 
+function actualizarCarrerasSinInscriptos() {
+    // 1. Recolectar carreras sin inscriptos
+    let carrerasSinInscriptos = [];
+    for (let i = 0; i < sistema.carreras.length; i++) {
+        let carrera = sistema.carreras[i];
+        // Contar inscripciones para esta carrera
+        let cont = 0;
+        for (let j = 0; j < sistema.inscripciones.length; j++) {
+            if (sistema.inscripciones[j].carreras.nombre === carrera.nombre) {
+                cont = cont + 1;
+            }
+        }
+        // Si no hay inscriptos, la agrego a la lista
+        if (cont === 0) {
+            carrerasSinInscriptos.push(carrera);
+        }
+    }
+
+    // 2. Ordenar por fecha creciente (formato 'YYYY-MM-DD' compara lexicográficamente)
+    carrerasSinInscriptos.sort(function(a, b) {
+        if (a.fecha < b.fecha) {
+            return -1;
+        } else {
+            return 1;
+        }
+    });
+
+    // 3. Mostrar en el <ul> con id="IdOrdenados"
+    let ul = document.getElementById("IdOrdenados");
+    ul.innerHTML = "";  // limpio lista previa
+
+    for (let i = 0; i < carrerasSinInscriptos.length; i++) {
+        let carrera = carrerasSinInscriptos[i];
+        let li = document.createElement("li");
+        let texto = carrera.nombre +
+                    ' en ' + carrera.departamento +
+                    ' el ' + carrera.fecha +
+                    ' Cupo: ' + carrera.cupo + '\n' +
+                    sistema.getPatrocinadores(carrera.nombre);
+        li.textContent = texto;
+        ul.appendChild(li);
+    }
+}
+
