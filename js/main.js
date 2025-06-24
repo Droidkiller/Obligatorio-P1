@@ -287,6 +287,7 @@ function mostrarEstadisticas() {
     bttnEstadisticas.style.backgroundColor = 'red';
     actualizarCarrerasConMasInscriptos();
     promedio();
+    actualizarCarrerasSinInscriptos();
 }
 
 function mostrarDatos() {
@@ -297,39 +298,46 @@ function mostrarDatos() {
     bttnDatos.style.backgroundColor = 'red';
     bttnEstadisticas.style.backgroundColor = '#f0f0f0';
 }
-
 function actualizarCarrerasConMasInscriptos() {
-    let carrerasConMasInscriptos = sistema.carreras.slice();
-
-    carrerasConMasInscriptos.sort((a, b) => {
-        let contadorA = 0;
-        for (let i = 0; i < sistema.inscripciones.length; i++) {
-            if (sistema.inscripciones[i].carreras.nombre === a.nombre) {
-                contadorA = contadorA + 1;
-            }
-        }
-        let contadorB = 0;
-        for (let i = 0; i < sistema.inscripciones.length; i++) {
-            if (sistema.inscripciones[i].carreras.nombre === b.nombre) {
-                contadorB = contadorB + 1;
-            }
-        }
-        return contadorB - contadorA;
-    });
-
     let ul = document.getElementById("IdMasInscriptos");
-    ul.innerHTML = "";
+    ul.innerHTML = "";  // limpio la lista
 
-    for (let i = 0; i < carrerasConMasInscriptos.length; i++) {
-        let carrera = carrerasConMasInscriptos[i];
+    let listaConConteo = [];
+    for (let i = 0; i < sistema.carreras.length; i++) {
+        let carrera = sistema.carreras[i];
+        let cont = 0;
+        for (let j = 0; j < sistema.inscripciones.length; j++) {
+            if (sistema.inscripciones[j].carreras.nombre === carrera.nombre) {
+                cont = cont + 1;
+            }
+        }
+        listaConConteo.push({ carrera: carrera, cantidad: cont });
+    }
+
+    let maxInscriptos = 0;
+    for (let i = 0; i < listaConConteo.length; i++) {
+        if (listaConConteo[i].cantidad > maxInscriptos) {
+            maxInscriptos = listaConConteo[i].cantidad;
+        }
+    }
+    if (maxInscriptos === 0) {
         let li = document.createElement("li");
-        let texto = carrera.nombre +
-                    ' en ' + carrera.departamento +
-                    ' el ' + carrera.fecha +
-                    ' Cupo: ' + carrera.cupo + '\n' +
-                    sistema.getPatrocinadores(carrera.nombre);
-        li.textContent = texto;
+        li.textContent = "sin datos";
         ul.appendChild(li);
+        return;
+    }
+
+    for (let i = 0; i < listaConConteo.length; i++) {
+        if (listaConConteo[i].cantidad === maxInscriptos) {
+            let carrera = listaConConteo[i].carrera;
+            let li = document.createElement("li");
+            li.textContent = carrera.nombre
+                              + " en " + carrera.departamento
+                              + " el " + carrera.fecha
+                              + " Cupo: " + carrera.cupo
+                              + "\n" + 'Inscriptos: ' + sistema.getCantidadInscripciones(carrera.nombre);
+            ul.appendChild(li);
+        }
     }
 }
 function calcularPromedioInscriptosPorCarrera() {
@@ -344,6 +352,7 @@ function calcularPromedioInscriptosPorCarrera() {
     }
     return promedio;
 }
+
 function promedio() {
     // obtengo el promedio y lo redondeo a 2 decimales
     let promedio = calcularPromedioInscriptosPorCarrera().toFixed(2);
@@ -351,24 +360,19 @@ function promedio() {
 }
 
 function actualizarCarrerasSinInscriptos() {
-    // 1. Recolectar carreras sin inscriptos
     let carrerasSinInscriptos = [];
     for (let i = 0; i < sistema.carreras.length; i++) {
         let carrera = sistema.carreras[i];
-        // Contar inscripciones para esta carrera
         let cont = 0;
         for (let j = 0; j < sistema.inscripciones.length; j++) {
             if (sistema.inscripciones[j].carreras.nombre === carrera.nombre) {
                 cont = cont + 1;
             }
         }
-        // Si no hay inscriptos, la agrego a la lista
         if (cont === 0) {
             carrerasSinInscriptos.push(carrera);
         }
     }
-
-    // 2. Ordenar por fecha creciente (formato 'YYYY-MM-DD' compara lexicográficamente)
     carrerasSinInscriptos.sort(function(a, b) {
         if (a.fecha < b.fecha) {
             return -1;
@@ -377,7 +381,6 @@ function actualizarCarrerasSinInscriptos() {
         }
     });
 
-    // 3. Mostrar en el <ul> con id="IdOrdenados"
     let ul = document.getElementById("IdOrdenados");
     ul.innerHTML = "";  // limpio lista previa
 
@@ -387,8 +390,7 @@ function actualizarCarrerasSinInscriptos() {
         let texto = carrera.nombre +
                     ' en ' + carrera.departamento +
                     ' el ' + carrera.fecha +
-                    ' Cupo: ' + carrera.cupo + '\n' +
-                    sistema.getPatrocinadores(carrera.nombre);
+                    ' Cupo: ' + carrera.cupo;
         li.textContent = texto;
         ul.appendChild(li);
     }

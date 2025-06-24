@@ -89,6 +89,15 @@ class Sistema {
         }
         return patrocinadores;
     }
+    getCantidadInscripciones(nombreCarrera) {
+    let contador = 0;
+    for (let i = 0; i < this.inscripciones.length; i++) {
+        if (this.inscripciones[i].carreras.nombre === nombreCarrera) {
+            contador = contador + 1;
+        }
+    }
+    return contador;
+};
 
     getCantidadCarrerasPorDepartamento(departamento) {
         let cantidad = 0;
