@@ -73,6 +73,20 @@ tr th {
     border: 1px solid black;
 }
 
+#tablaDatos th,
+#tablaDatos td {
+  border: 1px solid black;
+  padding: 4px;
+}
+
+#tablaDatos tbody tr {
+  background-color: transparent;
+}
+
+#tablaDatos tbody tr.elite {
+  background-color: red;
+}
+
 #containerMapa {
     width: 600px;     
     max-width: 100%;    

@@ -30,6 +30,13 @@ function inicio() {
     bttnEstadisticas.addEventListener('click', mostrarEstadisticas)
     bttnDatos.addEventListener('click', mostrarDatos);
 
+    document.getElementById('idCarreraConsulta')
+        .addEventListener('change', consultarInscriptos);
+    document.getElementById('idOrdenNombre')
+        .addEventListener('change', consultarInscriptos);
+    document.getElementById('idOrdenNumero')
+        .addEventListener('change', consultarInscriptos);
+
     google.charts.load('current', {
         'packages': ['geochart']
     });
@@ -37,6 +44,7 @@ function inicio() {
     document.querySelectorAll('input[name="mapa"]').forEach(radio => {
         radio.addEventListener('change', dibujarMapa);
     });
+    consultarInscriptos();
 }
 
 
@@ -416,3 +424,69 @@ function calcularPorcentajeElite() {
     return porcentajeFinal;
 }
 
+function consultarInscriptos() {
+  let selectCarrera = document.getElementById('idCarreraConsulta');
+  let nombreCarrera = selectCarrera.value;
+  let lista = [];
+
+  for (let i = 0; i < sistema.inscripciones.length; i++) {
+    if (sistema.inscripciones[i].carreras.nombre === nombreCarrera) {
+      lista.push(sistema.inscripciones[i]);
+    }
+  }
+
+  if (document.getElementById('idOrdenNombre').checked) {
+    lista.sort(function(a, b) {
+      if (a.corredores.nombre < b.corredores.nombre) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+  } else {
+    lista.sort(function(a, b) {
+      if (a.carreras.numero < b.carreras.numero) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+  }
+
+  let tabla = document.getElementById('tablaDatos');
+  let viejoTbody = tabla.querySelector('tbody');
+  if (viejoTbody) {
+    tabla.removeChild(viejoTbody);
+  }
+
+  let tbody = document.createElement('tbody');
+  for (let i = 0; i < lista.length; i++) {
+    let ins = lista[i];
+    let fila = document.createElement('tr');
+
+    if (ins.corredores.tipo === 'Elite') {
+      fila.classList.add('elite');
+    }
+
+    let tdNombre  = document.createElement('td');
+    let tdEdad    = document.createElement('td');
+    let tdCedula  = document.createElement('td');
+    let tdFicha   = document.createElement('td');
+    let tdNumero  = document.createElement('td');
+
+    tdNombre.textContent = ins.corredores.nombre;
+    tdEdad.textContent   = ins.corredores.edad;
+    tdCedula.textContent = ins.corredores.cedula;
+    tdFicha.textContent  = ins.corredores.fechaFicha;
+    tdNumero.textContent = ins.carreras.numero;
+
+    fila.appendChild(tdNombre);
+    fila.appendChild(tdEdad);
+    fila.appendChild(tdCedula);
+    fila.appendChild(tdFicha);
+    fila.appendChild(tdNumero);
+    tbody.appendChild(fila);
+  }
+
+  tabla.appendChild(tbody);
+}
