@@ -76,6 +76,14 @@ class Sistema {
         if(cont >= carrera.cupo) {
             alert("La carrera " + carrera.nombre + " ya ha alcanzado su cupo máximo de inscripciones.");
             flag = false;
+        }
+        for (let i = 0; i < this.inscripciones.length; i++) {
+            if (this.inscripciones[i].corredores.cedula === corredor.cedula &&
+                this.inscripciones[i].carreras.nombre === carrera.nombre)
+                {
+                    alert("El corredor ya está inscripto en esta carrera.");
+                    return false;
+                }
         }        
         return flag;
     }
