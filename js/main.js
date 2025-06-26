@@ -44,7 +44,6 @@ function inicio() {
     document.querySelectorAll('input[name="mapa"]').forEach(radio => {
         radio.addEventListener('change', dibujarMapa);
     });
-    consultarInscriptos();
 }
 
 
@@ -161,25 +160,26 @@ function agregarInscripcion(event) {
         if(sistema.validarInscripcion(corredor, carrera)) {
             let inscripcion = new Inscripcion(corredor, carrera);
             sistema.agregarInscripcion(inscripcion);
+            corredor.darNumero(carrera.nombre, carrera.numero);
+            carrera.numero++;
             console.log(inscripcion);
             form.reset();
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const texto = 
-                'Número: ' + carrera.numero + '\n' +
+                'Número: ' + corredor.getNumero(carrera.nombre) + '\n' +
                 'Nombre: ' + corredor.nombre + ' ' + corredor.edad + ', CI: ' + corredor.cedula + ' ' + corredor.fechaFicha + '\n' +
                 corredor.tipo + '\n' +
                 'Carrera: ' + carrera.nombre + ' en ' + carrera.departamento + ' el ' + carrera.fecha + ' Cupo: ' + carrera.cupo + '\n' +
                 sistema.getPatrocinadores(carrera.nombre);
             doc.text(doc.splitTextToSize(texto, 180), 10, 10);
             doc.save('inscripcion.pdf');
-            alert('Número: ' + carrera.numero + 
+            alert('Número: ' + corredor.getNumero(carrera.nombre) + 
                 "\nNombre: " + corredor.nombre + " " + corredor.edad + " años, CI: " + corredor.cedula + " Ficha Medica " + corredor.fechaFicha +
                 "\n" + corredor.tipo + 
                 "\nCarrera: " + carrera.nombre + " en " + carrera.departamento + " el " + carrera.fecha + " Cupo: " + carrera.cupo +
                 "\n" + sistema.getPatrocinadores(carrera.nombre)
             );
-            carrera.numero++;
         }
     } else {
         alert('Complete todos los datos de inscripción.');
@@ -305,6 +305,7 @@ function mostrarEstadisticas() {
     let porcentajeElite = calcularPorcentajeElite();
     document.getElementById('idPorcentajeElite').innerHTML = porcentajeElite + '%';
     dibujarMapa();
+    consultarInscriptos();
 }
 
 function mostrarDatos() {
@@ -357,6 +358,7 @@ function actualizarCarrerasConMasInscriptos() {
         }
     }
 }
+
 function calcularPromedioInscriptosPorCarrera() {
     let totalInscriptos = 0;
     for (let i = 0; i < sistema.inscripciones.length; i++) {
@@ -367,7 +369,7 @@ function calcularPromedioInscriptosPorCarrera() {
     if (cantidadCarreras > 0) {
         promedio = totalInscriptos / cantidadCarreras;
     }
-    return promedio;
+    return promedio || ' sin datos';
 }
 
 function promedio() {
@@ -484,7 +486,7 @@ function consultarInscriptos() {
         tdEdad.textContent   = ins.corredores.edad;
         tdCedula.textContent = ins.corredores.cedula;
         tdFicha.textContent  = ins.corredores.fechaFicha;
-        tdNumero.textContent = ins.carreras.numero;
+        tdNumero.textContent = ins.corredores.getNumero(ins.carreras.nombre);
 
         fila.appendChild(tdNombre);
         fila.appendChild(tdEdad);

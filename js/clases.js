@@ -67,24 +67,25 @@ class Sistema {
         if(corredor.fechaFicha < carrera.fecha) {
             alert("La fecha de la ficha médica del corredor está vencida.");
             flag = false;
-        }
-        for(let i=0;i<this.inscripciones.length;i++) {
-            if(this.inscripciones[i].carreras.nombre == carrera.nombre) {
-                cont++;
+        } else if(flag) {
+            for(let i=0;i<this.inscripciones.length;i++) {
+                if(this.inscripciones[i].carreras.nombre == carrera.nombre) {
+                    cont++;
+                }
+            }
+            if(cont >= carrera.cupo) {
+                alert("La carrera " + carrera.nombre + " ya ha alcanzado su cupo máximo de inscripciones.");
+                flag = false;
+            } else if(flag) {
+                for (let i = 0; i < this.inscripciones.length; i++ && flag) {
+                    if (this.inscripciones[i].corredores.cedula === corredor.cedula &&
+                        this.inscripciones[i].carreras.nombre === carrera.nombre) {
+                            alert("El corredor ya está inscripto en esta carrera.");
+                            flag = false;
+                    }
+                }
             }
         }
-        if(cont >= carrera.cupo) {
-            alert("La carrera " + carrera.nombre + " ya ha alcanzado su cupo máximo de inscripciones.");
-            flag = false;
-        }
-        for (let i = 0; i < this.inscripciones.length; i++) {
-            if (this.inscripciones[i].corredores.cedula === corredor.cedula &&
-                this.inscripciones[i].carreras.nombre === carrera.nombre)
-                {
-                    alert("El corredor ya está inscripto en esta carrera.");
-                    return false;
-                }
-        }        
         return flag;
     }
 
@@ -144,6 +145,7 @@ class Corredor {
         this.cedula = cedula;
         this.fechaFicha = fecFicha;
         this.tipo = tipo;
+        this.numero = {};
     }
 
     toString() {
@@ -152,6 +154,14 @@ class Corredor {
 
     getIdentificacion() {
         return this.nombre + " " + this.cedula;
+    }
+
+    darNumero(nombreCarrera, numero) {
+        this.numero[nombreCarrera] = numero;
+    }
+
+    getNumero(nombreCarrera) {
+        return this.numero[nombreCarrera];
     }
 }
 
