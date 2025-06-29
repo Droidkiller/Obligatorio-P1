@@ -127,10 +127,14 @@ Aitana Alvarez (340201)
                 <h4>Inscripciones</h4>
                 <form class="formulario" id="ingresoInscripciones">
                     <label>Corredores:</label>
-                    <select id="corredoresRegistrados" required></select>
+                    <select id="corredoresRegistrados" required>
+                        <option value="" disabled selected hidden>&nbsp;</option>
+                    </select>
     
                     <label>Carreras:</label>
-                    <select id="carrerasRegistradas" class="selectCarreras" required></select>
+                    <select id="carrerasRegistradas" class="selectCarreras" required>
+                         <option value="" disabled selected hidden>&nbsp;</option>
+                    </select>
     
                     <button id="bttnInscripcion">Inscribir</button>
                 </form>
@@ -155,7 +159,9 @@ Aitana Alvarez (340201)
             <article class="container">
                  <h4>Consulta inscriptos</h4>
                     <label for="idCarreraConsulta">Carrera:</label>
-                    <select id="idCarreraConsulta" class="selectCarreras" required></select>
+                    <select id="idCarreraConsulta" class="selectCarreras" required>
+                         <option value="" disabled selected hidden>&nbsp;</option>
+                    </select>
     
                     <div class="radio-row">                    
                         <p class="radio-label">Ordenar por:</p>
